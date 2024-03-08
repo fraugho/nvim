@@ -56,6 +56,13 @@ return require('packer').startup(function(use)
           'nvim-tree/nvim-web-devicons', -- optional
       },
   }
+
+  use {
+      'mrcjkb/rustaceanvim',
+      version = '^4', -- Use the recommended version
+      ft = { 'rust' }, -- Ensure the plugin is loaded only for Rust files
+  }
+
   use("github/copilot.vim")
   use("theprimeagen/harpoon")
   use("mbbill/undotree")

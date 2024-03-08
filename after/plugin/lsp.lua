@@ -7,6 +7,16 @@ lsp.ensure_installed({
   'rust_analyzer',
 })
 
+require'lspconfig'.rust_analyzer.setup{
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = true;
+      }
+    }
+  }
+}
+
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
 

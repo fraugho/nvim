@@ -180,6 +180,13 @@ _G.packer_plugins = {
     path = "/home/shadow/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  rustaceanvim = {
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/shadow/.local/share/nvim/site/pack/packer/opt/rustaceanvim",
+    url = "https://github.com/mrcjkb/rustaceanvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/shadow/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -202,6 +209,13 @@ time([[Defining packer_plugins]], false)
 time([[Config for darkrose]], true)
 try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\25colorscheme darkrose\bcmd\bvim\0", "config", "darkrose")
 time([[Config for darkrose]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType rust ++once lua require("packer.load")({'rustaceanvim'}, { ft = "rust" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
