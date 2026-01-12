@@ -1,21 +1,26 @@
 return {
-    "mrcjkb/rustaceanvim",
-    version = "^4",
-    ft = { "rust" },
-    opts = {
-        server = {
-            cmd = { vim.fn.expand("~/.rustup/toolchains/stable-aarch64-apple-darwin/bin/rust-analyzer") },
-            on_attach = function(client, bufnr)
-                vim.lsp.inlay_hint.enable()
-            end,
-            settings = {
-                ["rust-analyzer"] = {
-                    inlayHints = { enable = true },
-                },
-            },
+  "mrcjkb/rustaceanvim",
+  version = "^5",
+  ft = { "rust" },
+  opts = {
+    server = {
+      on_attach = function(client, bufnr)
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      end,
+      default_settings = {
+        ["rust-analyzer"] = {
+          inlayHints = {
+            bindingModeHints = { enable = true },
+            chainingHints = { enable = true },
+            closingBraceHints = { enable = true },
+            lifetimeElisionHints = { enable = "always" },
+            parameterHints = { enable = true },
+            typeHints = { enable = true },
+          },
+          checkOnSave = true,
+          procMacro = { enable = true },
         },
+      },
     },
-    config = function(_, opts)
-        vim.g.rustaceanvim = vim.tbl_deep_extend("force", {}, opts or {})
-    end,
+  },
 }
